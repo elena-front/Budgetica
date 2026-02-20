@@ -1,0 +1,44 @@
+.authWrapper {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 6px 12px;
+}
+
+.btn {
+  padding: 8px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn--active {
+  background-color: #7a431f;
+  color: rgb(250, 248, 245);
+}
+
+.btn--disabled {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 20px;
+}
+.m20 {
+  margin: 0 20px;
+  border-radius: 10px;
+  height: 40px;
+}
+form button:hover {
+  background: rgb(223, 167, 16);
+  color: #ffffff;
+}

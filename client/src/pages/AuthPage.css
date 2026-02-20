@@ -1,0 +1,95 @@
+.authPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+h1 {
+  margin: 0;
+  padding: 0;
+}
+.mainIcon {
+  font-size: 40px;
+}
+.regWrapper {
+  border: 1px solid rgb(230, 223, 223);
+  border-radius: 10px;
+  width: 500px;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+}
+
+.activeMode {
+  background-color: #703403;
+  color: rgb(230, 223, 223);
+  border: none;
+}
+.modeWrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.authWrapper {
+  display: flex;
+  width: 500px;
+  border: none;
+  color: #9e9c9c;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.modeWrapper button,
+.authWrapper button {
+  width: 220px;
+  height: 40px;
+  border-radius: 10px;
+}
+.activeAuth {
+  background-color: #faf8f5;
+  color: #312721;
+}
+
+button .disabled {
+  background-color: #efebe7;
+}
+
+.auth-btn {
+}
+
+.auth-btn--active {
+  color: rgb(250, 248, 245);
+  background-color: rgb(122, 67, 31);
+}
+
+.auth-btn--disabled {
+}
+
+.formWrapper {
+  padding: 0 24px 24px;
+  box-sizing: border-box;
+}
+
+.authPage input {
+  border-radius: 10px;
+  border-color: rgb(222, 214, 206);
+  border-width: 1px;
+  box-sizing: border-box;
+  color: rgb(49, 39, 33);
+  display: flex;
+  font-size: 16px;
+  height: 40px;
+  line-height: 24px;
+  padding: 8px 12px;
+  background-color: rgb(250, 248, 245);
+}
+
+.authPage label {
+  font-weight: 500;
+}

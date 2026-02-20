@@ -1,0 +1,22 @@
+body {
+  padding: 20px;
+}
+
+.container {
+  width: 1120px;
+  max-width: calc(100% - 48px);
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 40px;
+}
+
+.logoutBtn {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
