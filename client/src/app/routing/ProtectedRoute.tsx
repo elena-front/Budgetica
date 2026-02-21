@@ -1,17 +1,23 @@
 import { useLocation } from "react-router";
 import { CLIENT_ROUTES } from "../../shared/consts/clientRoutes";
 import { Navigate } from "react-router";
+import type { User } from "../../types/common";
 
 const ProtectedRoute = ({
   element,
   anonymous = false,
   user,
   userIsLoading,
+}: {
+  element: React.ReactElement;
+  anonymous: boolean;
+  user: User | null;
+  userIsLoading: boolean;
 }) => {
   const location = useLocation();
 
   if (user && anonymous) {
-    return <Navigate to={CLIENT_ROUTES.APP} replace />;
+    return <Navigate to={CLIENT_ROUTES.MAIN_PAGE} replace />;
   }
 
   if (!user && !anonymous) {

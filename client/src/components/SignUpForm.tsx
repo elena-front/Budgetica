@@ -1,10 +1,11 @@
-import { useState } from "react";
-import { setAccessToken } from "../../src/shared/lib/axiosInstance";
+import React, { useState } from "react";
+import { setAccessToken } from "../shared/lib/axiosInstance";
 import "./SignUpForm.css";
 import { UserValidator } from "../entities/user/model/UserValidator";
 import UserApi from "../entities/user/UserApi";
+import type { SetUser } from "../types/common";
 
-function SignUpForm({ setUser }) {
+function SignUpForm({ setUser }: { setUser: SetUser }) {
   const initialValue = {
     name: "",
     email: "",
@@ -12,14 +13,14 @@ function SignUpForm({ setUser }) {
   };
   const [signUpData, setSignUpData] = useState(initialValue);
 
-  const inputHandler = (event) => {
+  const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSignUpData((current) => ({
       ...current,
       [event.target.name]: event.target.value,
     }));
   };
 
-  const signUpHandler = async (event) => {
+  const signUpHandler = async (event: React.SubmitEvent) => {
     event.preventDefault();
 
     const { isValid, error: validationError } =

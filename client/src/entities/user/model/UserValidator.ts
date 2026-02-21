@@ -1,10 +1,12 @@
+import type { SignUpData, SignInData } from "../../../types/common";
+
 export class UserValidator {
-  static validateEmail(email) {
+  static validateEmail(email: string) {
     const emailPattern = /^[A-z0-9!-_%.]+@[A-z0-9.-]+\.[A-z]{2,}$/;
     return emailPattern.test(email);
   }
 
-  static validatePassword(password) {
+  static validatePassword(password: string) {
     const hasUppercase = /[A-Z]/;
     const hasLowercase = /[a-z]/;
     const hasDigits = /\d/;
@@ -23,70 +25,66 @@ export class UserValidator {
     return true;
   }
 
-  static validateSignUpData(data) {
+  static validateSignUpData(data: SignUpData) {
     const { name: name, email, password } = data;
 
-    if (
-      !name ||
-      typeof name !== 'string' ||
-      name.trim().length === 0
-    ) {
+    if (!name || typeof name !== "string" || name.trim().length === 0) {
       return {
         isValid: false,
-        error: 'Имя пользователя не должно быть пустым',
+        error: "Имя пользователя не должно быть пустым",
       };
     }
 
     if (
       !email ||
-      typeof email !== 'string' ||
+      typeof email !== "string" ||
       email.trim().length === 0 ||
       !this.validateEmail(email)
     ) {
       return {
         isValid: false,
-        error: 'Ошибка валидации адреса электронной почты',
+        error: "Ошибка валидации адреса электронной почты",
       };
     }
 
     if (
       !password ||
-      typeof password !== 'string' ||
+      typeof password !== "string" ||
       password.trim().length === 0 ||
       !this.validatePassword(password)
     ) {
       return {
         isValid: false,
-        error: 'Пароль не соответствует критериям валидации',
+        error: "Пароль не соответствует критериям валидации",
       };
     }
 
     return { isValid: true, error: null };
   }
 
-  static validateSignInData(data) {
+  static validateSignInData(data: SignInData) {
     const { email, password } = data;
 
     if (
       !email ||
-      typeof email !== 'string' ||
+      typeof email !== "string" ||
       email.trim().length === 0 ||
       !this.validateEmail(email)
     ) {
       return {
         isValid: false,
-        error: 'Ошибка валидации адреса электронной почты',
+        error: "Ошибка валидации адреса электронной почты",
       };
     }
 
     if (
       !password ||
-      typeof password !== 'string' ||
+      typeof password !== "string" ||
       password.trim().length === 0
     ) {
       return {
         isValid: false,
-        error: 'Пароль не соответствует критериям валидации',
+        error: "Пароль не соответствует критериям валидации",
       };
     }
 

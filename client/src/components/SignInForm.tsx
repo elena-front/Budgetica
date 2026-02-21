@@ -1,23 +1,24 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import "./SignInForm.css";
-import UserApi from "../../src/entities/user/UserApi";
-import { setAccessToken } from "../../src/shared/lib/axiosInstance";
-import { CLIENT_ROUTES } from "../../src/shared/consts/clientRoutes";
+import UserApi from "../entities/user/UserApi";
+import { setAccessToken } from "../shared/lib/axiosInstance";
+import { CLIENT_ROUTES } from "../shared/consts/clientRoutes";
+import type { SetUser } from "../types/common";
 
-function SignInForm({ setUser }) {
+function SignInForm({ setUser }: { setUser: SetUser }) {
   const initialValue = { email: "", password: "" };
   const [signInData, setSignInData] = useState(initialValue);
   const navigate = useNavigate();
 
-  const inputHandler = (event) => {
+  const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSignInData((current) => ({
       ...current,
       [event.target.name]: event.target.value,
     }));
   };
 
-  const signInHandler = async (event) => {
+  const signInHandler = async (event: React.SubmitEvent) => {
     event.preventDefault();
 
     const { statusCode, data, error } = await UserApi.signIn(signInData);
@@ -44,7 +45,6 @@ function SignInForm({ setUser }) {
             required
             onChange={inputHandler}
             value={signInData.email}
-            label="Email"
           />
         </div>
         <div className="inputGroup">
@@ -57,7 +57,6 @@ function SignInForm({ setUser }) {
             required
             onChange={inputHandler}
             value={signInData.password}
-            label="Пароль"
           />
         </div>
         <button className="btn btn--active m20" type="submit">

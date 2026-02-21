@@ -7,7 +7,7 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 export default defineConfig([
     globalIgnores(['dist']),
     {
-        files: ['**/*.{js,jsx,ts,tsx}'],
+        files: ['**/*.{js,jsx}'],
         extends: [
             js.configs.recommended,
             reactHooks.configs.flat.recommended,
@@ -22,6 +22,19 @@ export default defineConfig([
                 sourceType: 'module',
             },
         },
+        rules: {
+            'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+        },
+    },
+    {
+        files: ['**/*.{ts,tsx}'],
+        extends: [
+            js.configs.recommended,
+            reactHooks.configs.flat.recommended,
+            reactRefresh.configs.vite,
+        ],
+        languageOptions: { parser: tseslint.parser },
+        plugins: { "@typescript-eslint": tseslint.plugin },
         rules: {
             'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
         },

@@ -2,8 +2,15 @@ import { Outlet, NavLink, Link } from "react-router";
 import { CLIENT_ROUTES } from "../../shared/consts/clientRoutes";
 import "./Layout.css";
 import UserApi from "../../entities/user/UserApi";
+import type { SetUser, User } from "../../types/common";
 
-export default function Layout({ user, setUser }) {
+export default function Layout({
+  user,
+  setUser,
+}: {
+  user: User | null;
+  setUser: SetUser;
+}) {
   const handleSignOut = async () => {
     await UserApi.signOut();
     setUser(null);

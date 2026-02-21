@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import AppRouter from "./app/routing/AppRouter";
 import UserApi from "./entities/user/UserApi";
+import type { User } from "./types/common";
 
 // Компонент React - это функция
 function App() {
   const [userIsLoading, setUserIsLoading] = useState(true);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     async function refreshUser() {
