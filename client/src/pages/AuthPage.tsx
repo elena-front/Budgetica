@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useState, type Dispatch } from "react";
 import "./AuthPage.css";
 import SignUpForm from "../components/SignUpForm";
 import SignInForm from "../components/SignInForm";
-import type { SetUser } from "../types/common";
+import type { User } from "../types/common";
 
 const AUTH_MODES = {
   SIGN_IN: "sign_in",
   SIGN_UP: "sign_up",
 };
 
-function AuthPage({ setUser }: { setUser: SetUser }) {
+function AuthPage({ setUser }: { setUser: Dispatch<User | null> }) {
   const [mode, setMode] = useState(AUTH_MODES.SIGN_IN);
 
   return (

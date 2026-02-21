@@ -17,5 +17,3 @@ export type User = {
   createdAt: Date;
   updatedAt: Date;
 };
-
-export type SetUser = (user: User | null) => void;

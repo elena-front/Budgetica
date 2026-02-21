@@ -1,24 +1,29 @@
-import { useState } from "react";
+import {
+  useState,
+  type ChangeEvent,
+  type Dispatch,
+  type SubmitEvent,
+} from "react";
 import { useNavigate } from "react-router";
 import "./SignInForm.css";
 import UserApi from "../entities/user/UserApi";
 import { setAccessToken } from "../shared/lib/axiosInstance";
 import { CLIENT_ROUTES } from "../shared/consts/clientRoutes";
-import type { SetUser } from "../types/common";
+import type { User } from "../types/common";
 
-function SignInForm({ setUser }: { setUser: SetUser }) {
+function SignInForm({ setUser }: { setUser: Dispatch<User | null> }) {
   const initialValue = { email: "", password: "" };
   const [signInData, setSignInData] = useState(initialValue);
   const navigate = useNavigate();
 
-  const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setSignInData((current) => ({
       ...current,
       [event.target.name]: event.target.value,
     }));
   };
 
-  const signInHandler = async (event: React.SubmitEvent) => {
+  const signInHandler = async (event: SubmitEvent) => {
     event.preventDefault();
 
     const { statusCode, data, error } = await UserApi.signIn(signInData);

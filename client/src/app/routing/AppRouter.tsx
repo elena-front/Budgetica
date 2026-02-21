@@ -3,7 +3,8 @@ import Layout from "../Layout/Layout";
 import { CLIENT_ROUTES } from "../../shared/consts/clientRoutes";
 import AuthPage from "../../pages/AuthPage";
 import ProtectedRoute from "./ProtectedRoute";
-import type { SetUser, User } from "../../types/common";
+import type { User } from "../../types/common";
+import type { Dispatch } from "react";
 
 export default function AppRouter({
   user,
@@ -11,7 +12,7 @@ export default function AppRouter({
   userIsLoading,
 }: {
   user: User | null;
-  setUser: SetUser;
+  setUser: Dispatch<User | null>;
   userIsLoading: boolean;
 }) {
   return (

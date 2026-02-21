@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import {
+  useState,
+  type ChangeEvent,
+  type Dispatch,
+  type SubmitEvent,
+} from "react";
 import { setAccessToken } from "../shared/lib/axiosInstance";
 import "./SignUpForm.css";
 import { UserValidator } from "../entities/user/model/UserValidator";
 import UserApi from "../entities/user/UserApi";
-import type { SetUser } from "../types/common";
+import type { User } from "../types/common";
 
-function SignUpForm({ setUser }: { setUser: SetUser }) {
+function SignUpForm({ setUser }: { setUser: Dispatch<User | null> }) {
   const initialValue = {
     name: "",
     email: "",
@@ -13,14 +18,14 @@ function SignUpForm({ setUser }: { setUser: SetUser }) {
   };
   const [signUpData, setSignUpData] = useState(initialValue);
 
-  const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setSignUpData((current) => ({
       ...current,
       [event.target.name]: event.target.value,
     }));
   };
 
-  const signUpHandler = async (event: React.SubmitEvent) => {
+  const signUpHandler = async (event: SubmitEvent) => {
     event.preventDefault();
 
     const { isValid, error: validationError } =

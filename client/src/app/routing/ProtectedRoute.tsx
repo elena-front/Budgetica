@@ -2,6 +2,7 @@ import { useLocation } from "react-router";
 import { CLIENT_ROUTES } from "../../shared/consts/clientRoutes";
 import { Navigate } from "react-router";
 import type { User } from "../../types/common";
+import type { ReactElement } from "react";
 
 const ProtectedRoute = ({
   element,
@@ -9,7 +10,7 @@ const ProtectedRoute = ({
   user,
   userIsLoading,
 }: {
-  element: React.ReactElement;
+  element: ReactElement;
   anonymous: boolean;
   user: User | null;
   userIsLoading: boolean;
