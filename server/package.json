@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node --watch src/app.js",
-    "db:init": "npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all",
-    "db:reset": "npx sequelize db:drop && npm run db:init",
-    "lint": "eslint ."
+    "dev": "tsx watch src/app.ts",
+    "db:init": "sequelize db:create && sequelize db:migrate && sequelize db:seed:all",
+    "db:reset": "sequelize db:drop && npm run db:init",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
   },
   "keywords": [],
   "author": "",
@@ -15,8 +16,21 @@
   "type": "commonjs",
   "devDependencies": {
     "@eslint/js": "^9.39.2",
-    "eslint": "^9.39.2",
-    "globals": "^17.3.0"
+    "@types/bcrypt": "^6.0.0",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^25.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.56.0",
+    "@typescript-eslint/parser": "^8.56.0",
+    "eslint": "^9.39.3",
+    "globals": "^17.3.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.0"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
