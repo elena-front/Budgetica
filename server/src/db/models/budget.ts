@@ -1,56 +1,63 @@
 import type {
   CreationOptional,
+  ForeignKey,
   InferAttributes,
   InferCreationAttributes,
   Sequelize,
 } from "sequelize";
 import { DataTypes, Model } from "sequelize";
-import type Budget from "./budget";
+import type User from "./user";
 import type Category from "./category";
 import type Saving from "./saving";
 import type Transaction from "./transaction";
 
-export default class User extends Model<
-  InferAttributes<User>,
-  InferCreationAttributes<User>
+export default class Budget extends Model<
+  InferAttributes<Budget>,
+  InferCreationAttributes<Budget>
 > {
   declare id: CreationOptional<number>;
-  declare name: string;
-  declare email: string;
-  declare password: string;
+  declare user_id: ForeignKey<User["id"]>;
+
+  declare month: string;
+  declare year: number;
+  declare total_amount: number;
 
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 
   static associate(models: {
-    Budget: typeof Budget;
+    User: typeof User;
     Category: typeof Category;
     Saving: typeof Saving;
     Transaction: typeof Transaction;
   }) {
-    this.hasOne(models.Budget, { foreignKey: "user_id" });
-    this.hasMany(models.Category, { foreignKey: "user_id" });
-    this.hasOne(models.Saving, { foreignKey: "user_id" });
-    this.hasMany(models.Transaction, { foreignKey: "user_id" });
+    this.belongsTo(models.User, { foreignKey: "user_id" });
+    this.hasMany(models.Category, { foreignKey: "budget_id" });
+    this.hasOne(models.Saving, { foreignKey: "budget_id" });
+    this.hasMany(models.Transaction, { foreignKey: "budget_id" });
   }
 
-  static initModel(sequelize: Sequelize): typeof User {
-    return User.init(
+  static initModel(sequelize: Sequelize): typeof Budget {
+    return Budget.init(
       {
         id: {
           type: DataTypes.INTEGER.UNSIGNED,
           autoIncrement: true,
           primaryKey: true,
         },
-        name: {
+        user_id: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
+        month: {
           type: DataTypes.STRING,
           allowNull: false,
         },
-        email: {
-          type: DataTypes.STRING,
+        year: {
+          type: DataTypes.NUMBER,
           allowNull: true,
         },
-        password: {
+        total_amount: {
           type: DataTypes.STRING,
           allowNull: false,
         },
@@ -58,7 +65,7 @@ export default class User extends Model<
         updatedAt: DataTypes.DATE,
       },
       {
-        modelName: "User",
+        modelName: "Budget",
         sequelize,
       },
     );

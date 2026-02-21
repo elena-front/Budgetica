@@ -1,33 +1,32 @@
-import { hash } from "bcrypt";
-import type { QueryInterface } from "sequelize";
+const bcrypt = require("bcrypt");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface: QueryInterface) {
+  async up(queryInterface) {
     await queryInterface.bulkInsert(
       "Users",
       [
         {
           name: "test1",
           email: "test1@mail.com",
-          password: await hash("tesjkdfst1", 10),
+          password: await bcrypt.hash("tesjkdfst1", 10),
         },
         {
           name: "example",
           email: "example@mail.com",
-          password: await hash("esfdxa25mp#$le", 10),
+          password: await bcrypt.hash("esfdxa25mp#$le", 10),
         },
         {
           name: "user1",
           email: "user1@mail.com",
-          password: await hash("tuseGJ123r", 10),
+          password: await bcrypt.hash("tuseGJ123r", 10),
         },
       ],
       {},
     );
   },
 
-  async down(queryInterface: QueryInterface) {
+  async down(queryInterface) {
     await queryInterface.bulkDelete("Users", {});
   },
 };
