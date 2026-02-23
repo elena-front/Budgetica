@@ -26,14 +26,7 @@ module.exports = {
         allowNull: false,
         defaultValue: Sequelize.fn("NOW"),
       },
-      user_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "Users",
-          key: "id",
-        },
-      },
+
       budget_id: {
         type: Sequelize.INTEGER,
         allowNull: false,

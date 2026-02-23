@@ -7,22 +7,21 @@ import type {
 } from "sequelize";
 import { DataTypes, Model } from "sequelize";
 import type Budget from "./budget";
-import type User from "./user";
 
 export default class Saving extends Model<
   InferAttributes<Saving>,
   InferCreationAttributes<Saving>
 > {
   declare id: CreationOptional<number>;
-  declare user_id: ForeignKey<User["id"]>;
+
   declare budget_id: ForeignKey<Budget["id"]>;
   declare amount: number;
 
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 
-  static associate(models: { User: typeof User; Budget: typeof Budget }) {
-    this.belongsTo(models.User, { foreignKey: "user_id" });
+  static associate(models: {Budget: typeof Budget }) {
+
     this.belongsTo(models.Budget, { foreignKey: "budget_id" });
   }
 
@@ -34,10 +33,7 @@ export default class Saving extends Model<
           autoIncrement: true,
           primaryKey: true,
         },
-        user_id: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
-        },
+  
         budget_id: {
           type: DataTypes.INTEGER,
           allowNull: false,

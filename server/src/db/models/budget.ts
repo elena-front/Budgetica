@@ -18,7 +18,7 @@ export default class Budget extends Model<
   declare id: CreationOptional<number>;
   declare user_id: ForeignKey<User["id"]>;
 
-  declare month: string;
+  declare month: number;
   declare year: number;
   declare total_amount: number;
 

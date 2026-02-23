@@ -6,9 +6,7 @@ import type {
 } from "sequelize";
 import { DataTypes, Model } from "sequelize";
 import type Budget from "./budget";
-import type Category from "./category";
-import type Saving from "./saving";
-import type Transaction from "./transaction";
+
 
 export default class User extends Model<
   InferAttributes<User>,
@@ -24,14 +22,10 @@ export default class User extends Model<
 
   static associate(models: {
     Budget: typeof Budget;
-    Category: typeof Category;
-    Saving: typeof Saving;
-    Transaction: typeof Transaction;
+
   }) {
-    this.hasOne(models.Budget, { foreignKey: "user_id" });
-    this.hasMany(models.Category, { foreignKey: "user_id" });
-    this.hasOne(models.Saving, { foreignKey: "user_id" });
-    this.hasMany(models.Transaction, { foreignKey: "user_id" });
+    this.hasMany(models.Budget, { foreignKey: "user_id" });
+
   }
 
   static initModel(sequelize: Sequelize): typeof User {
