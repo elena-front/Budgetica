@@ -6,7 +6,7 @@ import type {
 } from "sequelize";
 import { DataTypes, Model } from "sequelize";
 import type Budget from "./budget";
-
+import type Saving from "./saving";
 
 export default class User extends Model<
   InferAttributes<User>,
@@ -20,12 +20,9 @@ export default class User extends Model<
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 
-  static associate(models: {
-    Budget: typeof Budget;
-
-  }) {
+  static associate(models: { Budget: typeof Budget; Saving: typeof Saving }) {
     this.hasMany(models.Budget, { foreignKey: "user_id" });
-
+    this.hasOne(models.Saving, { foreignKey: "user_id" });
   }
 
   static initModel(sequelize: Sequelize): typeof User {

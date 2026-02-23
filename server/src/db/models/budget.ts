@@ -33,7 +33,6 @@ export default class Budget extends Model<
   }) {
     this.belongsTo(models.User, { foreignKey: "user_id" });
     this.hasMany(models.Category, { foreignKey: "budget_id" });
-    this.hasOne(models.Saving, { foreignKey: "budget_id" });
     this.hasMany(models.Transaction, { foreignKey: "budget_id" });
   }
 

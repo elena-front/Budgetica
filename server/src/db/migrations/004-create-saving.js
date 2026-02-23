@@ -30,14 +30,6 @@ module.exports = {
           key: "id",
         },
       },
-      budget_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "Budgets",
-          key: "id",
-        },
-      },
     });
   },
 

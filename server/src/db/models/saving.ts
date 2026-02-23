@@ -14,15 +14,14 @@ export default class Saving extends Model<
 > {
   declare id: CreationOptional<number>;
 
-  declare budget_id: ForeignKey<Budget["id"]>;
+  declare user_id: ForeignKey<Budget["id"]>;
   declare amount: number;
 
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 
-  static associate(models: {Budget: typeof Budget }) {
-
-    this.belongsTo(models.Budget, { foreignKey: "budget_id" });
+  static associate(models: { Budget: typeof Budget }) {
+    this.belongsTo(models.Budget, { foreignKey: "user_id" });
   }
 
   static initModel(sequelize: Sequelize): typeof Saving {
@@ -33,8 +32,8 @@ export default class Saving extends Model<
           autoIncrement: true,
           primaryKey: true,
         },
-  
-        budget_id: {
+
+        user_id: {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
