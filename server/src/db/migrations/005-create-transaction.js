@@ -10,7 +10,7 @@ module.exports = {
       },
       amount: {
         allowNull: false,
-        type: Sequelize.DECIMAL,
+        type: Sequelize.DOUBLE,
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -21,22 +21,6 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
         defaultValue: Sequelize.fn("NOW"),
-      },
-      user_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "Users",
-          key: "id",
-        },
-      },
-      budget_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "Budgets",
-          key: "id",
-        },
       },
       category_id: {
         type: Sequelize.INTEGER,

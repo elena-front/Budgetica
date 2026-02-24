@@ -19,7 +19,6 @@ export default function Layout({
 
   return (
     <>
-      ``
       <header>
         <div className="header">
           <nav>

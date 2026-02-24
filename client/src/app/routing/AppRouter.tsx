@@ -5,6 +5,7 @@ import AuthPage from "../../pages/AuthPage";
 import ProtectedRoute from "./ProtectedRoute";
 import type { User } from "../../types/common";
 import type { Dispatch } from "react";
+import Home from "../../pages/Home";
 
 export default function AppRouter({
   user,
@@ -29,6 +30,18 @@ export default function AppRouter({
               user={user}
               userIsLoading={userIsLoading}
               element={<AuthPage setUser={setUser} />}
+            />
+          }
+        ></Route>
+
+        <Route
+          path={CLIENT_ROUTES.MAIN_PAGE}
+          element={
+            <ProtectedRoute
+              user={user}
+              userIsLoading={userIsLoading}
+              element={<Home />}
+              anonymous={false}
             />
           }
         ></Route>

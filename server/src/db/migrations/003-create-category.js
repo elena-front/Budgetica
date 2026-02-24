@@ -14,7 +14,7 @@ module.exports = {
       },
       budget_limit: {
         allowNull: false,
-        type: Sequelize.DECIMAL,
+        type: Sequelize.DOUBLE,
       },
       createdAt: {
         type: Sequelize.DATE,

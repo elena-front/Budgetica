@@ -17,3 +17,15 @@ export type User = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type Category = {
+  id: number;
+  name: string;
+  limit: number;
+  spent: number;
+};
+
+export type Saving = {
+  id: number;
+  amount: number;
+};

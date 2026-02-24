@@ -1,4 +1,5 @@
-import type { Budget, Category } from "../db/models";
+import type { InferAttributes } from "sequelize";
+import type { Budget, Category, Saving, Transaction } from "../db/models";
 
 export type CreateUserDTO = {
   name: string;
@@ -19,6 +20,11 @@ export type CreateCategoryDTO = {
   budget_limit: number;
 };
 
+export type UpdateCategoryDTO = {
+  name: string;
+  budget_limit: number;
+};
+
 export type CreateSavingDTO = {
   budget_id: number;
   amount: number;
@@ -29,9 +35,15 @@ export type CreateTransactionDTO = {
   amount: number;
 };
 
-export type BudgetDTO = Budget & {
-  categories: Category[];
+export type BudgetDTO = InferAttributes<Budget> & {
+  categories: InferAttributes<Category>[];
 };
+
+export type CategoryDTO = InferAttributes<Category>;
+
+export type SavingDTO = InferAttributes<Saving>;
+
+export type TransactionDTO = InferAttributes<Transaction>;
 
 export type SingupData = {
   name: string;

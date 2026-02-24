@@ -42,10 +42,12 @@ export default class BudgetController {
     const { month, year } = req.query;
     const user_id = res.locals.user.id;
     try {
-      const myBudget = (await BudgetService.getBudgetByUserId(user_id)).find(
-        (budget) =>
-          budget.month === Number(month) && budget.year === Number(year),
-      );
+      const myBudget = (await BudgetService.getBudgetByUserId(user_id))
+        .map((budget) => budget.get())
+        .find(
+          (budget) =>
+            budget.month === Number(month) && budget.year === Number(year),
+        );
       if (!myBudget) {
         return res
           .status(404)
@@ -54,16 +56,16 @@ export default class BudgetController {
           );
       }
 
-      const categories = await CategoryService.getAllCategory(myBudget.id);
+      const categories = (
+        await CategoryService.getAllCategory(myBudget.id)
+      ).map((category) => category.get());
 
-      return res
-        .status(200)
-        .json(
-          formatResponse(200, "Запрос успешно выполнен", {
-            ...myBudget,
-            categories,
-          }),
-        );
+      return res.status(200).json(
+        formatResponse(200, "Запрос успешно выполнен", {
+          ...myBudget,
+          categories,
+        }),
+      );
     } catch (error) {
       console.log("==== BudgetController.getBudget ==== ");
       console.log(error);
