@@ -2,7 +2,7 @@ import { useState } from "react";
 import type {
   CategoryDTO,
   TransactionDTO,
-} from "../../../server/src/types/database.types";
+} from "../types/database.types";
 import { Modal } from "./Modal";
 import EditCategory from "./EditCategory";
 import AddTransaction from "./AddTransaction";
@@ -15,7 +15,9 @@ export default function CategoryWidget({
 }: {
   category: CategoryDTO;
   transactions: TransactionDTO[];
+  // eslint-disable-next-line no-unused-vars
   onCategoryUpdated: (updatedCategory: CategoryDTO) => void;
+  // eslint-disable-next-line no-unused-vars
   onTransactionAdded: (transaction: TransactionDTO) => void;
 }) {
   const [editModal, setEditModal] = useState(false);

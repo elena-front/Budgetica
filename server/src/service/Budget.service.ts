@@ -3,7 +3,11 @@ import type { CreateBudgetDTO } from "../types/database.types";
 
 export default class BudgetService {
   static async getBudgetByUserId(user_id: number) {
-    return (await Budget.findAll({ where: { user_id } }));
+    return await Budget.findAll({ where: { user_id } });
+  }
+
+  static async getBudgetByIdAndUserId(id: number, user_id: number) {
+    return await Budget.findOne({ where: { id, user_id } });
   }
 
   static async createNewBudget(budgetData: CreateBudgetDTO) {

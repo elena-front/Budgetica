@@ -1,4 +1,4 @@
-import type { CategoryDTO } from "../../../server/src/types/database.types";
+import type { CategoryDTO } from "../types/database.types";
 import { useState, type SubmitEvent, type ChangeEvent } from "react";
 import CategoryApi from "../entities/CategoryApi";
 
@@ -7,6 +7,7 @@ export default function EditCategory({
   onSave,
 }: {
   category: CategoryDTO;
+  // eslint-disable-next-line no-unused-vars
   onSave: (updatedCategory: CategoryDTO) => void;
 }) {
   const [formData, setFormData] = useState({

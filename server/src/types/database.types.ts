@@ -26,7 +26,7 @@ export type UpdateCategoryDTO = {
 };
 
 export type CreateSavingDTO = {
-  budget_id: number;
+  user_id: number;
   amount: number;
 };
 

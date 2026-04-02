@@ -1,24 +1,13 @@
 import { useEffect, useState } from "react";
-import type {
-  BudgetDTO,
-  CategoryDTO,
-  SavingDTO,
-  TransactionDTO,
-} from "../../../server/src/types/database.types";
+import type { BudgetDTO, CategoryDTO, SavingDTO, TransactionDTO } from "../types/database.types";
 import CategoryWidget from "../components/CategoryWidget";
 import BudgetApi from "../entities/BudgetApi";
 import CategoryApi from "../entities/CategoryApi";
-import { Modal } from "../components/Modal";
+import SavingApi from "../entities/SavingApi";
 
 export default function Home() {
   const [budget, setBudget] = useState<BudgetDTO>();
-  const [saving, setSaving] = useState<SavingDTO>({
-    id: 1,
-    amount: 51000,
-    user_id: 1,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  });
+  const [saving, setSaving] = useState<SavingDTO | null>(null);
 
   const [transactions, setTransactions] = useState<TransactionDTO[]>([]);
 
@@ -54,10 +43,12 @@ export default function Home() {
         )
       ).flatMap((list) => list);
       setTransactions(loadedTransactions);
+
+      const loadedSaving = await SavingApi.getSaving();
+      setSaving(loadedSaving);
     }
 
     loadBudget();
-    // await load saving
   }, []);
 
   if (!budget) {
@@ -95,7 +86,7 @@ export default function Home() {
         </div>
         <div>
           <span>Сбережения</span>
-          <span>{saving.amount}</span>
+          <span>{saving?.amount ?? 0}</span>
         </div>
         {total_remain >= 0 && (
           <div>

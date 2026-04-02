@@ -2,18 +2,21 @@ import { Saving } from "../db/models";
 import type { CreateSavingDTO } from "../types/database.types";
 
 export default class SavingService {
-      static async createNewBudget(budgetData: CreateSavingDTO) {
-        return (await Saving.create(budgetData))?.get();
-      }
+  static async getSavingByUserId(user_id: number) {
+    return await Saving.findOne({ where: { user_id } });
+  }
 
-        static async updateSavingById(id: number, amount:number) {
-          const budgetToUpdate = await Saving.findByPk(id);
-      
-          if(!budgetToUpdate) return null;
-      
-          budgetToUpdate.amount = amount;
-          await budgetToUpdate.save();
-      
-          return budgetToUpdate;
-        }
+  static async createSaving(savingData: CreateSavingDTO) {
+    return (await Saving.create(savingData)).get();
+  }
+
+  static async updateSavingByUserId(user_id: number, amount: number) {
+    const savingToUpdate = await SavingService.getSavingByUserId(user_id);
+    if (!savingToUpdate) return null;
+
+    savingToUpdate.amount = amount;
+    await savingToUpdate.save();
+
+    return savingToUpdate.get();
+  }
 }

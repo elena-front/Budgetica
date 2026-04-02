@@ -1,4 +1,4 @@
-import type { TransactionDTO } from "../../../server/src/types/database.types";
+import type { TransactionDTO } from "../types/database.types";
 import { axiosInstance } from "../shared/lib/axiosInstance";
 
 export default class TransactionApi {

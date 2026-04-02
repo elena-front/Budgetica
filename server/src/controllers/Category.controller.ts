@@ -2,11 +2,29 @@ import type { Request, Response } from "express";
 import TransactionService from "../service/Transaction.service";
 import formatResponse from "../utils/formatResponse";
 import CategoryService from "../service/Category.service";
+import BudgetService from "../service/Budget.service";
 
 export default class CategoryController {
   static async createCategory(req: Request, res: Response) {
     const { budget_id, budget_limit, name } = req.body;
+    const user_id = res.locals.user.id;
+
     try {
+      const userBudget = await BudgetService.getBudgetByIdAndUserId(
+        Number(budget_id),
+        user_id,
+      );
+      if (!userBudget) {
+        return res.status(403).json(
+          formatResponse(
+            403,
+            "Нет доступа к этому бюджету",
+            null,
+            "Нет доступа к этому бюджету",
+          ),
+        );
+      }
+
       const newCategory = await CategoryService.createNewCategory({
         budget_id,
         budget_limit,
@@ -25,8 +43,33 @@ export default class CategoryController {
   static async updateCategory(req: Request, res: Response) {
     const { id: category_id } = req.params;
     const { budget_limit, name } = req.body;
+    const user_id = res.locals.user.id;
 
     try {
+      const existingCategory = await CategoryService.getCategoryById(
+        Number(category_id),
+      );
+      if (!existingCategory) {
+        return res
+          .status(404)
+          .json(formatResponse(404, "Категория не найдена"));
+      }
+
+      const userBudget = await BudgetService.getBudgetByIdAndUserId(
+        Number(existingCategory.budget_id),
+        user_id,
+      );
+      if (!userBudget) {
+        return res.status(403).json(
+          formatResponse(
+            403,
+            "Нет доступа к этой категории",
+            null,
+            "Нет доступа к этой категории",
+          ),
+        );
+      }
+
       const updatedCategory = await CategoryService.updateCategoryById(
         Number(category_id),
         { name, budget_limit },
@@ -43,7 +86,31 @@ export default class CategoryController {
 
   static async getTransactions(req: Request, res: Response) {
     const { id } = req.params;
+    const user_id = res.locals.user.id;
+
     try {
+      const existingCategory = await CategoryService.getCategoryById(Number(id));
+      if (!existingCategory) {
+        return res
+          .status(404)
+          .json(formatResponse(404, "Категория не найдена"));
+      }
+
+      const userBudget = await BudgetService.getBudgetByIdAndUserId(
+        Number(existingCategory.budget_id),
+        user_id,
+      );
+      if (!userBudget) {
+        return res.status(403).json(
+          formatResponse(
+            403,
+            "Нет доступа к этой категории",
+            null,
+            "Нет доступа к этой категории",
+          ),
+        );
+      }
+
       const transactions = await TransactionService.getAllTransactions(
         Number(id),
       );

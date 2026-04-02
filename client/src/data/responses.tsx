@@ -1,4 +1,4 @@
-import type { BudgetDTO } from "../../../server/src/types/database.types";
+import type { BudgetDTO } from "../types/database.types";
 
 export const budget: BudgetDTO = {
   id: 2,

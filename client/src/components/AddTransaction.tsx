@@ -1,8 +1,5 @@
 import { type SubmitEvent, type ChangeEvent, useState } from "react";
-import type {
-  CategoryDTO,
-  TransactionDTO,
-} from "../../../server/src/types/database.types";
+import type { CategoryDTO, TransactionDTO } from "../types/database.types";
 import TransactionApi from "../entities/TransactionApi";
 
 export default function AddTransaction({
@@ -10,6 +7,7 @@ export default function AddTransaction({
   onSave,
 }: {
   category: CategoryDTO;
+  // eslint-disable-next-line no-unused-vars
   onSave: (transaction: TransactionDTO) => void;
 }) {
   const [formData, setFormData] = useState({ amount: 0 });

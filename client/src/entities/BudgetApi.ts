@@ -1,8 +1,5 @@
 import { axiosInstance } from "../shared/lib/axiosInstance";
-import type {
-  BudgetDTO,
-  CreateBudgetDTO,
-} from "../../../server/src/types/database.types";
+import type { BudgetDTO, CreateBudgetDTO } from "../types/database.types";
 import type { AxiosError } from "axios";
 
 export default class BudgetApi {

@@ -5,12 +5,14 @@ import formatResponse from "../utils/formatResponse";
 import transactionRouter from "./transaction.router";
 import { verifyAccessToken } from "../middleware/verifyAccessToken";
 import categoryRouter from "./category.router";
+import savingRouter from "./saving.router";
 
 export default Router()
   .use("/auth", authRouter)
   .use("/budget", verifyAccessToken, budgetRouter)
   .use("/transaction", verifyAccessToken, transactionRouter)
   .use("/category", verifyAccessToken, categoryRouter)
+  .use("/saving", verifyAccessToken, savingRouter)
   .use((req, res) => {
     return res.status(404).json(formatResponse(404, "Ресурс не найден"));
   });

@@ -2,7 +2,7 @@ import type {
   CreateCategoryDTO,
   TransactionDTO,
   UpdateCategoryDTO,
-} from "../../../server/src/types/database.types";
+} from "../types/database.types";
 import { axiosInstance } from "../shared/lib/axiosInstance";
 
 export default class CategoryApi {
