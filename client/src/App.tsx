@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import AppRouter from "./app/routing/AppRouter";
 import UserApi from "./entities/user/UserApi";
 import type { User } from "./types/common";
+import { setAccessToken } from "./shared/lib/axiosInstance";
 
 // Компонент React - это функция
 function App() {
@@ -16,6 +17,7 @@ function App() {
 
         if (statusCode === 200) {
           setUser(data.user);
+          setAccessToken(data.accessToken);
         } else {
           console.error(error);
         }

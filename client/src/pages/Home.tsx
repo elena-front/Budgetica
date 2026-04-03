@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import type { BudgetDTO, CategoryDTO, SavingDTO, TransactionDTO } from "../types/database.types";
+import type {
+  BudgetDTO,
+  CategoryDTO,
+  SavingDTO,
+  TransactionDTO,
+} from "../types/database.types";
 import CategoryWidget from "../components/CategoryWidget";
 import BudgetApi from "../entities/BudgetApi";
 import CategoryApi from "../entities/CategoryApi";
@@ -106,6 +111,7 @@ export default function Home() {
       <div>
         {budget.categories.map((category) => (
           <CategoryWidget
+            key={category.id}
             category={category}
             transactions={transactions.filter(
               (transaction) => transaction.category_id === category.id,
