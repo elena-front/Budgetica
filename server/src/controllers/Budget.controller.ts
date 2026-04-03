@@ -6,9 +6,30 @@ import formatResponse from "../utils/formatResponse";
 export default class BudgetController {
   static async createNewBudget(req: Request, res: Response) {
     const { month, year, total_amount } = req.body;
+    const user_id = res.locals.user.id;
     try {
+      const existingBudget = (await BudgetService.getBudgetByUserId(user_id))
+        .map((budget) => budget.get())
+        .find(
+          (budget) =>
+            budget.month === Number(month) && budget.year === Number(year),
+        );
+
+      if (existingBudget) {
+        const categories = (
+          await CategoryService.getAllCategory(existingBudget.id)
+        ).map((category) => category.get());
+
+        return res.status(200).json(
+          formatResponse(200, "Бюджет уже существует", {
+            ...existingBudget,
+            categories,
+          }),
+        );
+      }
+
       const newBudget = await BudgetService.createNewBudget({
-        user_id: res.locals.user.id,
+        user_id,
         month,
         year,
         total_amount,

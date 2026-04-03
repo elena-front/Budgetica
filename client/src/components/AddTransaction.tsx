@@ -32,19 +32,31 @@ export default function AddTransaction({
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="amount"></label>
+    <form className="modalForm" onSubmit={handleSubmit}>
+      <div className="modalForm__header">
+        <h3>Добавить транзакцию</h3>
+        <p>Укажите сумму расхода для категории «{category.name}».</p>
+      </div>
+
+      <div className="modalField">
+        <label htmlFor="amount">Сумма</label>
         <input
           id="amount"
           name="amount"
+          type="number"
+          min="0"
+          step="0.01"
           onChange={inputHandler}
+          placeholder="Например, 1500"
           value={formData.amount}
         />
       </div>
-      <button type="submit" disabled={!canAdd}>
-        Добавить
-      </button>
+
+      <div className="modalActions">
+        <button className="modalButton modalButton--primary" type="submit" disabled={!canAdd}>
+          Добавить
+        </button>
+      </div>
     </form>
   );
 }

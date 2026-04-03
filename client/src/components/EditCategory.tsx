@@ -33,26 +33,41 @@ export default function EditCategory({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="name">Имя</label>
+    <form className="modalForm" onSubmit={handleSubmit}>
+      <div className="modalForm__header">
+        <h3>Редактирование категории</h3>
+        <p>Измените название и лимит расходов для выбранной категории.</p>
+      </div>
+
+      <div className="modalField">
+        <label htmlFor="name">Название</label>
         <input
           id="name"
           name="name"
           onChange={inputHandler}
+          placeholder="Например, Продукты"
           value={formData.name}
         ></input>
       </div>
-      <div>
+      <div className="modalField">
         <label htmlFor="budget_limit">Лимит</label>
         <input
           id="budget_limit"
           name="budget_limit"
+          type="number"
+          min="0"
+          step="0.01"
           onChange={inputHandler}
+          placeholder="Например, 10000"
           value={formData.budget_limit}
         ></input>
       </div>
-      <button type="submit">Сохранить</button>
+
+      <div className="modalActions">
+        <button className="modalButton modalButton--primary" type="submit">
+          Сохранить
+        </button>
+      </div>
     </form>
   );
 }

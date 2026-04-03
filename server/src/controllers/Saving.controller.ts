@@ -6,11 +6,13 @@ export default class SavingController {
   static async getSaving(req: Request, res: Response) {
     const user_id = res.locals.user.id;
     try {
-      let saving = await SavingService.getSavingByUserId(user_id);
+      const saving = await SavingService.getSavingByUserId(user_id);
 
       if (!saving) {
-        saving = await SavingService.createSaving({ user_id, amount: 0 });
-        return res.status(201).json(formatResponse(201, "Сбережения созданы", saving));
+        const newSaving = await SavingService.createSaving({ user_id, amount: 0 });
+        return res
+          .status(201)
+          .json(formatResponse(201, "Сбережения созданы", newSaving));
       }
 
       return res.status(200).json(formatResponse(200, "OK", saving.get()));

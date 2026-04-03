@@ -1,0 +1,117 @@
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(34, 24, 18, 0.42);
+  backdrop-filter: blur(10px);
+}
+
+.modalCard {
+  width: min(460px, 100%);
+  padding: 28px;
+  border-radius: 28px;
+  background: linear-gradient(180deg, #fffdfa, #fff6ec);
+  box-shadow: 0 24px 56px rgba(43, 30, 20, 0.22);
+}
+
+.modalForm {
+  display: grid;
+  gap: 18px;
+}
+
+.modalForm__header h3 {
+  margin-bottom: 8px;
+}
+
+.modalForm__header p {
+  margin: 0;
+  color: #725f51;
+  font-size: 0.96rem;
+}
+
+.modalField {
+  display: grid;
+  gap: 8px;
+}
+
+.modalField label {
+  color: #4a392d;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.modalField input {
+  width: 100%;
+  border: 1px solid #e2d3c2;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 14px 16px;
+  color: #2f2118;
+  font-size: 1rem;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.modalField input::placeholder {
+  color: #a08a7b;
+}
+
+.modalField input:focus {
+  border-color: #cf6c47;
+  box-shadow: 0 0 0 4px rgba(207, 108, 71, 0.14);
+  background: #fff;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.modalButton {
+  min-width: 132px;
+}
+
+.modalButton--secondary {
+  background: rgba(242, 229, 215, 0.95);
+  color: #433126;
+}
+
+.modalButton--primary {
+  background: linear-gradient(135deg, #cf6c47, #a85f45);
+  color: #fffaf6;
+  box-shadow: 0 12px 24px rgba(169, 96, 67, 0.2);
+}
+
+.modalButton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (max-width: 640px) {
+  .modalOverlay {
+    padding: 16px;
+  }
+
+  .modalCard {
+    padding: 22px;
+    border-radius: 24px;
+  }
+
+  .modalActions {
+    justify-content: stretch;
+  }
+
+  .modalButton {
+    width: 100%;
+  }
+}

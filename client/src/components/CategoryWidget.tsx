@@ -6,6 +6,7 @@ import type {
 import { Modal } from "./Modal";
 import EditCategory from "./EditCategory";
 import AddTransaction from "./AddTransaction";
+import CategorySpendChart from "./CategorySpendChart";
 
 export default function CategoryWidget({
   category,
@@ -50,16 +51,23 @@ export default function CategoryWidget({
         />
       </Modal>
 
-      <div>диаграмма</div>
-      <div>{category.name}</div>
-      <div>Лимит: {category.budget_limit}</div>
-      <div>Потрачено: {total_spent}</div>
-      {total_remain >= 0 && <div>Остаток: {total_remain}</div>}
-      {total_remain < 0 && <div>Перерасход: {-total_remain}</div>}
-      <button onClick={() => setEditModal(true)}>Редактировать</button>
-      <button onClick={() => setAddTransactionModal(true)}>
-        Добавить транзакцию
-      </button>
+      <article className="categoryCard">
+        <CategorySpendChart
+          spent={total_spent}
+          limit={category.budget_limit}
+        />
+        <div>{category.name}</div>
+        <div>Лимит: {category.budget_limit}</div>
+        <div>Потрачено: {total_spent}</div>
+        {total_remain >= 0 && <div>Остаток: {total_remain}</div>}
+        {total_remain < 0 && <div>Перерасход: {-total_remain}</div>}
+        <div className="categoryCard__actions">
+          <button onClick={() => setEditModal(true)}>Редактировать</button>
+          <button onClick={() => setAddTransactionModal(true)}>
+            Добавить транзакцию
+          </button>
+        </div>
+      </article>
     </>
   );
 }

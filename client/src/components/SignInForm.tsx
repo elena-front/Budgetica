@@ -41,10 +41,10 @@ function SignInForm({ setUser }: { setUser: Dispatch<User | null> }) {
     <>
       <form className="form" onSubmit={signInHandler}>
         <div className="inputGroup">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Эл. почта</label>
           <input
             id="email"
-            placeholder="you@example.com"
+            placeholder="name@example.com"
             name="email"
             type="email"
             required

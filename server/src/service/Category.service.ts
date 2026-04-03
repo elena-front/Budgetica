@@ -21,10 +21,10 @@ export default class CategoryService {
 
     if (!categoryToUpdate) return null;
 
-    if(name) {
+    if(name !== undefined) {
         categoryToUpdate.name = name;
     }
-    if(budget_limit) {
+    if(budget_limit !== undefined) {
         categoryToUpdate.budget_limit = budget_limit;
     }
 
