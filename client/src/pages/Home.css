@@ -42,12 +42,105 @@
 }
 
 .heroBanner__period {
-  padding: 12px 18px;
+  border: 0;
+  padding: 10px 16px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.72);
-  color: #4f4338;
+  background: transparent;
+  color: #5d4a3c;
   font-weight: 700;
-  text-transform: capitalize;
+  min-height: 44px;
+  text-transform: none;
+  cursor: pointer;
+}
+
+.heroBanner__period--active {
+  background: #2f2118;
+  color: #fff8f1;
+}
+
+.heroBanner__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  padding: 6px;
+  min-height: 56px;
+  border-radius: 999px;
+  background: rgba(242, 229, 215, 0.92);
+}
+
+.heroBanner__actions .btn {
+  min-height: 44px;
+}
+
+.heroBanner__actions .btn--ghost {
+  background: transparent;
+  color: #5d4a3c;
+  box-shadow: none;
+}
+
+.heroBanner__actions .btn--primary {
+  background: #2f2118;
+  color: #fff8f1;
+  box-shadow: none;
+}
+
+.historyPanel {
+  padding: 24px;
+  border-radius: 28px;
+  background: rgba(255, 252, 247, 0.94);
+  box-shadow: 0 18px 40px rgba(67, 45, 22, 0.1);
+}
+
+.historyPanel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.historyPanel__header h2 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.historyPanel__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.historyMonthCard {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, #fffdfa, #f8f1e8);
+  box-shadow: inset 0 0 0 1px rgba(229, 214, 199, 0.7);
+}
+
+.historyMonthCard__header h3 {
+  margin-bottom: 6px;
+}
+
+.historyMonthCard__header p {
+  margin: 0;
+  color: #725f51;
+}
+
+.historyMonthCard__list {
+  display: grid;
+  gap: 10px;
+}
+
+.historyMonthCard__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(228, 212, 194, 0.74);
 }
 
 .overviewGrid {
@@ -83,8 +176,10 @@
 
 .budgetTabs {
   display: inline-flex;
+  align-items: center;
   gap: 8px;
   padding: 6px;
+  min-height: 56px;
   border-radius: 999px;
   background: rgba(242, 229, 215, 0.92);
 }
@@ -96,6 +191,7 @@
   color: #5d4a3c;
   padding: 10px 16px;
   font-weight: 700;
+  min-height: 44px;
 }
 
 .budgetTab--active {
@@ -123,6 +219,8 @@
 }
 
 .chartCard {
+  display: flex;
+  flex-direction: column;
   padding: 24px;
   border-radius: 26px;
   background: linear-gradient(180deg, #fbfffc, #f5fbf8);
@@ -132,13 +230,36 @@
 .chartCard__header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 16px;
   margin-bottom: 20px;
 }
 
-.chartCard__header h2 {
-  margin: 0;
+.chartTabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  min-height: 56px;
+  border-radius: 999px;
+  background: rgba(242, 229, 215, 0.92);
+  flex-wrap: wrap;
+}
+
+.chartTab {
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #5d4a3c;
+  padding: 10px 16px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  min-height: 44px;
+}
+
+.chartTab--active {
+  background: #2f2118;
+  color: #fff8f1;
 }
 
 .chartCard__body {
@@ -204,6 +325,13 @@
   font-size: 0.98rem;
 }
 
+.chartCard__footer {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: auto;
+  padding-top: 24px;
+}
+
 .categoryGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -263,6 +391,7 @@
 
 .transactionsInlineHeader h2 {
   margin: 0;
+  font-size: 1.3rem;
 }
 
 .transactionsCard__empty {
@@ -321,9 +450,22 @@
     flex-direction: column;
   }
 
+  .historyPanel__header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .heroBanner__actions {
+    justify-content: flex-start;
+  }
+
   .budgetCard__header {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .chartCard__header {
+    margin-bottom: 16px;
   }
 
   .chartCard__body {

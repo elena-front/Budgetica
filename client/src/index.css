@@ -4,8 +4,8 @@
 
 :root {
   color-scheme: light;
-  --font-body: "Segoe UI", "Trebuchet MS", Arial, sans-serif;
-  --font-title: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  --font-body: Arial, Tahoma, sans-serif;
+  --font-title: Arial, Tahoma, sans-serif;
 }
 
 html,

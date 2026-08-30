@@ -62,8 +62,18 @@ export default function CategoryWidget({
         {total_remain >= 0 && <div>Остаток: {total_remain}</div>}
         {total_remain < 0 && <div>Перерасход: {-total_remain}</div>}
         <div className="categoryCard__actions">
-          <button onClick={() => setEditModal(true)}>Редактировать</button>
-          <button onClick={() => setAddTransactionModal(true)}>
+          <button
+            className="btn btn--ghost"
+            onClick={() => setEditModal(true)}
+            type="button"
+          >
+            Редактировать
+          </button>
+          <button
+            className="btn btn--ghost"
+            onClick={() => setAddTransactionModal(true)}
+            type="button"
+          >
             Добавить транзакцию
           </button>
         </div>

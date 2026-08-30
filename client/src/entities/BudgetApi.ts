@@ -32,4 +32,21 @@ export default class BudgetApi {
       throw error;
     }
   }
+
+  static async updateBudget(
+    year: number,
+    month: number,
+    total_amount: number,
+  ): Promise<BudgetDTO> {
+    try {
+      const response = await axiosInstance.patch(
+        `/budget?month=${month}&year=${year}`,
+        { total_amount },
+      );
+      return response.data.data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
 }

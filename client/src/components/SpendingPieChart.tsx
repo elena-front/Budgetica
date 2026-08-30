@@ -1,3 +1,5 @@
+import { useState, type ReactNode } from "react";
+
 type PieSlice = {
   label: string;
   value: number;
@@ -31,50 +33,116 @@ function buildChartBackground(data: PieSlice[]) {
 
 export default function SpendingPieChart({
   data,
-  title,
+  action,
+  totalBudget,
+  totalSpent,
 }: {
   data: Array<{ label: string; value: number }>;
-  title: string;
+  action?: ReactNode;
+  totalBudget: number;
+  totalSpent: number;
 }) {
+  const [activeTab, setActiveTab] = useState<"categories" | "budget">(
+    "categories",
+  );
   const chartData = data.map((slice, index) => ({
     ...slice,
     color: PIE_COLORS[index % PIE_COLORS.length],
   }));
   const total = chartData.reduce((sum, slice) => sum + slice.value, 0);
+  const totalRemain = Math.max(totalBudget - totalSpent, 0);
+  const budgetChartData = [
+    { label: "Потрачено", value: totalSpent, color: "#d96c47" },
+    { label: "Остаток", value: totalRemain, color: "#7fa48c" },
+  ];
+  const budgetChartBackground = buildChartBackground(
+    budgetChartData.filter((slice) => slice.value > 0),
+  );
 
   return (
     <section className="chartCard">
       <div className="chartCard__header">
-        <h2>{title}</h2>
-        <span>{total}</span>
+        <div className="chartTabs" role="tablist" aria-label="Режим диаграммы">
+          <button
+            aria-selected={activeTab === "categories"}
+            className={`chartTab ${activeTab === "categories" ? "chartTab--active" : ""}`}
+            onClick={() => setActiveTab("categories")}
+            role="tab"
+            type="button"
+          >
+            Расходы по категориям
+          </button>
+          <button
+            aria-selected={activeTab === "budget"}
+            className={`chartTab ${activeTab === "budget" ? "chartTab--active" : ""}`}
+            onClick={() => setActiveTab("budget")}
+            role="tab"
+            type="button"
+          >
+            Общий бюджет
+          </button>
+        </div>
       </div>
 
-      <div className="chartCard__body">
-        <div
-          aria-label={title}
-          className="chartCard__pie"
-          role="img"
-          style={{ background: buildChartBackground(chartData) }}
-        >
-          <div className="chartCard__pieCenter">
-            <span>Всего</span>
-            <strong>{total}</strong>
+      {activeTab === "categories" && (
+        <div className="chartCard__body">
+          <div
+            aria-label="Расходы по категориям"
+            className="chartCard__pie"
+            role="img"
+            style={{ background: buildChartBackground(chartData) }}
+          >
+            <div className="chartCard__pieCenter">
+              <span>Всего</span>
+              <strong>{total}</strong>
+            </div>
+          </div>
+
+          <div className="chartCard__legend">
+            {chartData.map((slice) => (
+              <div className="chartCard__legendItem" key={slice.label}>
+                <span
+                  className="chartCard__legendColor"
+                  style={{ backgroundColor: slice.color }}
+                />
+                <span className="chartCard__legendLabel">{slice.label}</span>
+                <span className="chartCard__legendValue">{slice.value}</span>
+              </div>
+            ))}
           </div>
         </div>
+      )}
 
-        <div className="chartCard__legend">
-          {chartData.map((slice) => (
-            <div className="chartCard__legendItem" key={slice.label}>
-              <span
-                className="chartCard__legendColor"
-                style={{ backgroundColor: slice.color }}
-              />
-              <span className="chartCard__legendLabel">{slice.label}</span>
-              <span className="chartCard__legendValue">{slice.value}</span>
+      {activeTab === "budget" && (
+        <div className="chartCard__body">
+          <div
+            aria-label="Общий бюджет"
+            className="chartCard__pie"
+            role="img"
+            style={{ background: budgetChartBackground }}
+          >
+            <div className="chartCard__pieCenter">
+              <span>Остаток</span>
+              <strong>{totalRemain}</strong>
             </div>
-          ))}
+          </div>
+
+          <div className="chartCard__legend">
+            {budgetChartData.map((slice) => (
+              <div className="chartCard__legendItem" key={slice.label}>
+                <span
+                  className="chartCard__legendColor"
+                  style={{ backgroundColor: slice.color }}
+                />
+                <span className="chartCard__legendLabel">{slice.label}</span>
+                <span className="chartCard__legendValue">{slice.value}</span>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
+
+      {action && <div className="chartCard__footer">{action}</div>}
     </section>
   );
 }

@@ -4,9 +4,11 @@ import type { CategoryDTO } from "../types/database.types";
 
 export default function AddCategory({
   budgetId,
+  remainingBudget,
   onSave,
 }: {
   budgetId: number;
+  remainingBudget: number;
   // eslint-disable-next-line no-unused-vars
   onSave: (category: CategoryDTO) => void;
 }) {
@@ -15,7 +17,10 @@ export default function AddCategory({
     budget_limit: 0,
   });
 
-  const canSave = formData.name.trim().length > 0 && Number(formData.budget_limit) >= 0;
+  const canSave =
+    formData.name.trim().length > 0 &&
+    Number(formData.budget_limit) >= 0 &&
+    Number(formData.budget_limit) <= remainingBudget;
 
   const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setFormData((current) => ({
@@ -40,7 +45,10 @@ export default function AddCategory({
     <form className="modalForm" onSubmit={handleSubmit}>
       <div className="modalForm__header">
         <h3>Новая категория</h3>
-        <p>Добавьте ещё одну категорию расходов в текущий бюджет.</p>
+        <p>
+          Добавьте ещё одну категорию расходов в текущий бюджет.
+          Доступно для распределения: {remainingBudget}
+        </p>
       </div>
 
       <div className="modalField">
