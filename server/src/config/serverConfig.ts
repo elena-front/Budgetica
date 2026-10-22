@@ -6,8 +6,13 @@ import path from "path";
 import cookieParser from "cookie-parser";
 import removeXPoweredByHeader from "../middleware/removeHeader";
 
+const defaultCorsOrigins = ["http://localhost:5173", "http://127.0.0.1:5173"];
+const configuredCorsOrigins = process.env.CORS_ORIGINS?.split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
 const corsOptions: cors.CorsOptions = {
-  origin: ["http://localhost:5173", "http://127.0.0.1:5173"],
+  origin: configuredCorsOrigins?.length ? configuredCorsOrigins : defaultCorsOrigins,
   credentials: true,
 };
 
