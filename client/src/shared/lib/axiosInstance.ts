@@ -36,7 +36,10 @@ axiosInstance.interceptors.response.use(
         return axiosInstance(previousRequest);
       } catch (error) {
         setAccessToken("");
-        window.location.href = "/auth";
+        window.location.href =
+          import.meta.env.BASE_URL === "/"
+            ? "/auth"
+            : `${import.meta.env.BASE_URL}#/auth`;
         return Promise.reject(error);
       }
     }

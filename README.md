@@ -49,3 +49,14 @@
 - Светлый минималистичный стиль
 - Чистый белый фон, мягкие тени, аккуратная типографика
 - Адаптивная сетка диаграмм
+
+### Развёртывание клиента на GitHub Pages
+
+Клиент публикуется по адресу `https://elena-front.github.io/Budgetica/` из ветки `main` через GitHub Actions. Маршруты используют часть URL после `#`, например `/Budgetica/#/auth`, чтобы обновление страницы работало на статическом хостинге.
+
+1. Разверните сервер API отдельно с HTTPS. GitHub Pages размещает только статические файлы клиента.
+2. В настройках репозитория **Settings → Secrets and variables → Actions → Variables** создайте `VITE_API_URL` с публичным адресом API, включая `/api` (например, `https://api.example.com/api`). Значение попадает в клиентский JavaScript и не должно быть секретом.
+3. Настройте сервер для запросов с `https://elena-front.github.io` и передачи cookie между сайтами. Текущая конфигурация сервера разрешает только localhost; для авторизации на Pages понадобятся CORS с credentials и cookie с `SameSite=None; Secure`.
+4. В **Settings → Pages → Build and deployment** выберите **GitHub Actions**. После изменения `client/` в ветке `main` workflow опубликует сайт; его также можно запустить вручную.
+
+Для локальной проверки сборки Pages выполните `cd client && VITE_API_URL=https://api.example.com/api npm run build:pages && npm run preview`. Обычные `npm run dev` и `npm run build` сохраняют корневой путь `/`.
